@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+
+body {
+    min-height: 100vh;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+* {
+    box-shadow: none !important;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    box-sizing: border-box;
+}
+#webcontent {
+    height: 100vh;
+    overflow: auto;
+    width: 100% !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    position: relative;
+    border: 1px solid aquamarine;
+}
+header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+footer {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+section div#container {
+    margin-top: 32px;
+    width: 100%;
+    height: calc(100vh - 60px);
+    overflow: auto;
+}
+input[name="headersKey[]"] {
+    text-transform: capitalize;
+}
+input[type='text'],input[type='url'],input[type='email'],button,table,select,textarea,label {
+    font-size: 12px !important;
+}
+input[type='checkbox'],select {
+    cursor: pointer;
+}
+.body-table {
+    height: 200px;
+}
+#dataBoxses ul li button.active {
+    background-color: inherit !important;
+    color: red;
+    font-weight: 700;
+}
+#radioNav .nav-tabs .nav-item.show .nav-link, #radioNav .nav-tabs .nav-link.active {
+    color: #495057;
+    background-color: inherit !important;
+    border: none !important;
+}
+.textSmall {
+    font-size: 12px !important;
+}
+#responseDesc button {
+    font-size: 10px !important;
+}
+#textResponse {
+    background-color: #2D2D2D;
+    height: 300px;
+    color: #fff;
+}
+.jsonResponse {
+    margin: 0 !important;
+}
+.scroll::-webkit-scrollbar {
+    width: 4px;
+    height: 6px;
+}
+.scroll::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-track {
+    background-color: #F8F9FA;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    height: 6px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+    background-color: #F8F9FA;
+}
+
+#updateBox {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 300px;
+    height: 80px;
+    border: 1px solid aquamarine !important;
+    z-index: 99999;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    padding: 10px;
+}
+#updateBox label {
+    color: aquamarine;
+    text-shadow: 1px 1px 1px black;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 15px !important;
+}
+#updateBox progress {
+    width: 100%;
+}
+#loading {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.deleteBtn {
+    border-radius: 50%;
+    background: rgba(255,0,0,0.2);
+}
+.addBtn {
+    border-radius: 50%;
+    background: rgba(3, 254, 254, 0.2);
+    color: rgb(8, 133, 133);
+}
+#radioBox .nav-link {
+    padding: 0 !important;
+    margin: 0 15px !important;
+    background: inherit !important;
+    color: black !important;
+}
+.modal span {
+    font-size: 15px !important;
+}
+.activeGoodRatingButton {
+    background-color: green !important;
+    color: white !important;
+}
+.activeBadRatingButton {
+    background-color: red;
+    color: white;
+}
+
+#fileMenus li a {
+    font-size: 13px !important;
+}
+#aboutModal .modal-body p {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 13px;
+}
+#licenseBody::-webkit-scrollbar {
+    width: 4px !important;
+}
+#licenseBody::-webkit-scrollbar-thumb {
+    background-color: #ddd !important;
+}
+#licenseBody::-webkit-scrollbar-track{
+    background-color: black !important;
+}
+
+#licenseBody p {
+    font-size: 12px !important;
+    text-align: justify;
+}
+#licenseBody small {
+    font-size: 10px !important;
+}
+#licenseBody ol li, #licenseBody ul li {
+    font-size: 10px !important;
+    text-align: justify;
+}
+
+#fileMenus ul li a{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width:768px) {
+    #webcontent {
+        width: 100% !important;
+    }
+    #sendBox button {
+        width: 100% !important;
+    }
+    #version {
+        display: none !important;
+    }
+    #appName {
+        font-size: 10px !important;
+    }
+    #feedbackButton {
+        width: 100% !important  ;
+    }
+    #dataBoxses {
+        height: auto !important;
+    }
+}
+@media (max-width:425px) {
+    section div#container {
+        height: 100% !important;
+    }
+    footer {
+        position: static !important;
+    }
+}

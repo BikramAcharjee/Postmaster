@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simple API Testing Tool Width Crypto Encryption" >
+    <meta name="keywords" content="Crypto, Postman, Postmaster, Api testing tool, HTML, CSS, Javascript" >
+    <meta name="author" content="Bikram Acharjee" >
+    <title>Postmaster Beta</title>
+    <link rel="icon" href="./assets/images/js.ico" type="image/ico">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/checkbox.css">
+    <link rel="stylesheet" href="./assets/prism/prism.css">
+    <link rel="stylesheet" href="./assets/prism/glowLoading.css">
+    <link rel='stylesheet' href='./assets/css/styles.css'>
+    <script src="./assets/js/updater.js" defer></script>
+    <script>
+        var $ = require('./assets/js/jquery.js');
+    </script>
+    <script src='./assets/js/script.js' defer></script>
+    
+</head>
+<body class="bg-dark">
+    <div id="webpage">
+        <div id="webcontent" class="mx-auto bg-light">
+            <header>
+                <div id="header" class="w-100 bg-info text-white d-flex justify-content-between align-items-center">
+                    <div class="ms-4 d-flex align-items-center" id="appName">
+                        <img src="assets/images/js.ico" alt="logo" width="30" class="me-2">
+                        <strong style="text-shadow: 2px 2px 2px black;letter-spacing: 1px;">POSTMASTER <i><small class="version"></small></i></strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center text-white">
+                        <p class="p-0 my-0 me-4" id="version" style="text-shadow: 2px 2px 2px black;font-size: 12px;letter-spacing: 1px;"><span class="version"></span></p>
+                        <div class="btn-group">
+                            <button class="btn text-white">
+                                <i class="fa-solid fa-bell" id="notification"></i>
+                            </button>
+                            <button class="btn text-white" onclick="windowMinimize()">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <button class="btn text-white" onclick="windowMaximize()">
+                                <i class="fa fa-window-maximize"></i>
+                            </button>
+                            <button class="btn text-white" type="button" onclick="windowClose()">
+                                <i class="fa fa-close"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section>
+                <div id="container">
+                    <div id="fileMenus" class="m-0 p-0 navbar navbar-expand navbar-light bg-light shadow-sm">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item dropdown">
+                              <a class="nav-link" data-bs-toggle="dropdown" href="#">File</a>
+                              <ul class="dropdown-menu shadow-sm">
+                                <li onclick="javascript:location.reload()"><a class="dropdown-item" href="#"><span>Reload</span> CTRL+R</a></li>
+                                <li onclick="window.close()">
+                                    <a class="dropdown-item" href="#">
+                                        <span>Quit</span>
+                                        CTRL+W
+                                    </a>
+                                </li>
+                              </ul>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link" href="#">Edit</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                              <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                Help
+                              </a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li id="license"><a class="dropdown-item" href="#">
+                                    License
+                                    <i class="fa-solid fa-certificate text-info"></i>
+                                </a></li>
+                                <li onclick="openBlog()"><a class="dropdown-item" href="#">
+                                    Visit Blog
+                                    <i class="fa-solid fa-blog text-info"></i>
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li id="aboutUs"><a class="dropdown-item" href="#">
+                                    About
+                                    <i class="fa-solid fa-address-card text-info"></i>
+                                </a></li>
+                              </ul>
+                            </li>
+                          </ul>
+                    </div>
+                    <div class="pt-3 px-4 rounded-sm">
+                        <form id="postmanForm">
+                            <!-- Request Send Form Design Start -->
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <select class="form-select mb-3" name="method">
+                                        <option value="get">GET</option>
+                                        <option value="post">POST</option>
+                                        <option value="delete">DELETE</option>
+                                        <option value="put">PUT</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="input-group mb-3">
+                                        <select name="protocol" class="input-group-text">
+                                            <option value="http://">http</option>
+                                            <option value="https://">https</option>
+                                        </select>
+                                        <input type="text" name="url" placeholder="Enter request URL" required class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-end" id="sendBox">
+                                    <button class="btn btn-danger px-4 mb-3" type="submit">
+                                        Send Request
+                                        <i class="fa fa-paper-plane ms-1"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Request Send Form Design End -->
+                        </form>
+                            <!-- Encryption Design Coding Start -->
+                        <form id="encryptionForm" onsubmit="javascript:return false">
+                            <div class="row mb-2">
+                                <div class="col-md-2">
+                                    <button class="btn btn-outline-primary mr-5 mb-3" id="feedbackButton" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <i class="fa-solid fa-comment"></i>
+                                        FeedBack
+                                    </button>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="input-group input-group-sm mb-3 d-none" id="secretBox">
+                                        <span class="input-group-text">Key</span>
+                                        <input type="text" placeholder="Ex. data" name="encryptKeyName" class="form-control">
+                                        <span class="input-group-text">Secret</span>
+                                        <input type="password" autocomplete="new-secret" name="secret" class="form-control w-50" placeholder="Enter Your Secret">
+                                        <button class="input-group-text px-3" type="button" id="visibility">
+                                            <i class="fa-solid fa-eye" id="eye"></i>
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-3 d-lg-flex justify-content-between align-items-center">
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="encryptall" class="form-check-input" id="encryptall">
+                                        <label for="encryptall" class="form-check-label">Encrypt All</label>
+                                    </div>
+                                    <div class="form-check form-switch mb-3">
+                                        <input type="checkbox" name="encryptdata" class="form-check-input" id="encryptdata">
+                                        <label for="encryptdata" class="form-check-label">Encrypt Data</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                            <!-- Encryption Design Coding End -->
+                            
+                            <!-- FormData Design Coding Start -->
+                        <div id="dataBoxses">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="form-tab" data-bs-toggle="tab" data-bs-target="#form" type="button" role="tab">Body</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="headers-tab" data-bs-toggle="tab" data-bs-target="#headers" type="button" role="tab">Headers</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="params-tab" data-bs-toggle="tab" data-bs-target="#params" type="button" role="tab">Params</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active pt-3" id="form" role="tabpanel" aria-labelledby="form-tab">
+                                    <div id="radioBox">
+                                        <form id="contentTypeForm" onsubmit="javascript:return false">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-none" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                                                        <input type="radio" name="contentType" id="none" value="none">
+                                                        <label for="none">None</label>
+                                                    </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-formdata" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
+                                                        <input type="radio" name="contentType" id="formdata" value="formdata">
+                                                        <label for="formdata">Formdata</label>
+                                                    </button>
+                                                    </li>
+                                                    <li class="nav-item active" role="presentation">
+                                                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-json" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
+                                                        <input type="radio" name="contentType" id="json" value="json" checked>
+                                                        <label for="json">JSON</label>
+                                                    </button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="pills-raw-tab" data-bs-toggle="pill" data-bs-target="#pills-raw" type="button" role="tab" aria-controls="pills-raw" aria-selected="false">
+                                                        <input type="radio" name="contentType" id="raw" value="raw">
+                                                        <label for="raw">Raw</label>
+                                                    </button>
+                                                    </li>
+                                                    <li class="nav-item">
+                                                        <button type="button" style="margin-top: -5px;" id="otherModalBtn" class="btn btn-outline-info mx-3">Other</button>
+                                                    </li>
+                                                </ul>
+                                                <button class="btn btn-warning" style="margin-top: -20px;" data-bs-toggle="modal" data-bs-target="#cookiesModal">Cookies</button>
+                                            </div>
+                                        </form>
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade" id="pills-none" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                This request does not have a body.
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-formdata" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                <form id="formDataForm" onsubmit="javascript: return false">
+                                                    <div class="table-responsive body-table">
+                                                        <table class="table table-bordered table-primary">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Key</th>
+                                                                    <th scope="col">Value</th>
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="dataTable">
+                                                                <tr id="dataDesign">
+                                                                    <td scope="row">1</td>
+                                                                    <td>
+                                                                        <input type="text" name="key[]" placeholder="Key" class="form-control">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" name="value[]" placeholder="Value" class="form-control">
+                                                                    </td>
+                                                                    <td style="width:70px;">
+                                                                        <button class="btn addBtn" type="button" id="addData">
+                                                                            <i class="fa-solid fa-plus"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade show active" id="pills-json" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                                <form id="jsonForm" onsubmit="javascript:return false">
+                                                    <div class="table-responsive body-table">
+                                                        <table class="table table-bordered table-primary">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col">#</th>
+                                                                    <th scope="col">Key</th>
+                                                                    <th scope="col">Value</th>
+                                                                    <th scope="col">Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="jsonTable">
+                                                                <tr id="jsonDesign">
+                                                                    <td scope="row">1</td>
+                                                                    <td>
+                                                                        <input type="text" name="jsonKey[]" placeholder="Key" class="form-control">
+                                                                    </td>
+                                                                    <td>
+                                                                        <input type="text" name="jsonValue[]" placeholder="Value" class="form-control">
+                                                                    </td>
+                                                                    <td style="width:70px;">
+                                                                        <button class="btn addBtn" type="button" id="addJson">
+                                                                            <i class="fa-solid fa-plus"></i>
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane fade" id="pills-raw" role="tabpanel" aria-labelledby="pills-raw-tab">
+                                                <form id="rawForm" class="body-table" onsubmit="javascript:return false">
+                                                    <div class="form-floating">
+                                                        <textarea class="form-control" name="textData" placeholder="Leave a comment here" id="rawData" style="height: 100px"></textarea>
+                                                        <label for="rawData">Raw Data</label>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade pt-3" id="headers" role="tabpanel" aria-labelledby="headers-tab">
+                                    <form id="headersForm" onsubmit="javascript:return false">
+                                        <div class="table-responsive body-table">
+                                            <table class="table table-bordered table-info" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Key</th>
+                                                        <th>Value</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="headerTable">
+                                                    <tr id="headerDesign">
+                                                        <td>1</td>
+                                                        <td>
+                                                            <input type="text" name="headersKey[]" placeholder="Key" class="form-control">
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" name="headersValue[]" placeholder="Value" class="form-control">
+                                                        </td>
+                                                        <td style="width:70px;">
+                                                            <button class="btn addBtn" type="button" id="addHeaders">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="tab-pane fade pt-3" id="params" role="tabpanel" aria-labelledby="params-tab">
+                                    <form id="paramsForm" onsubmit="javascript:return false">
+                                        <div class="table-responsive body-table">
+                                            <table class="table table-bordered table-warning" >
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Key</th>
+                                                        <!-- <th>Value</th> -->
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="paramsTable">
+                                                    <tr id="paramsDesign">
+                                                        <td>1</td>
+                                                        <td>
+                                                            <input type="text" name="paramsKey[]" placeholder="Key" class="form-control">
+                                                        </td>
+                                                        <!-- <td>
+                                                            <input type="text" name="paramsValue[]" placeholder="Value" class="form-control">
+                                                        </td> -->
+                                                        <td style="width:70px;">
+                                                            <button class="btn addBtn" type="button" id="addParams">
+                                                                <i class="fa-solid fa-plus"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                            <!-- FormData Design Coding End -->
+                        <!-- Response Design Coding Start -->
+                        <div class="border bg-white m-0 position-relative">
+                            <div>
+                                <div class="d-flex justify-content-end align-items-center sticky-top bg-light pe-4" id="responseDesc">
+                                    <button class="btn mx-3" id="responseType"></button>
+                                    <button class="btn" id="statusCode"></button>
+                                    <button class="btn mx-3" id="time"></button>
+                                </div>
+                                <div>
+                                    <pre class="language-javascript overflow-auto scroll jsonResponse" style="height: 300px;"><code id="response" class="language-javascript line-numbers"></code></pre>
+                                    <div id="textResponse" class="d-none overflow-auto scroll p-3"></div>
+                                </div>
+                            </div>
+                            <div id="loading" class="d-none">
+                                <div>
+                                    <ul>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                        <li></li>
+                                    </ul>
+                                    <div class="mt-5">
+                                        <button class="btn btn-outline-warning mt-5" id="cancelRequest">Cancel Request</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <!-- Response Design Coding End -->
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div align="center" class="bg-dark py-1 text-light w-100 font-weight-bold mt-3" style="font-size: 12px;letter-spacing: 2px;">
+                    <small><i class="fa-regular fa-copyright text-info"></i> Copyright reserved 2022 by Wap Institute <i class="fa-solid fa-at text-danger"></i> Student</small>
+                </div>
+            </footer>
+            
+            <div id="updateMainBox" class="d-none">
+                <div id="updateBox">
+                    <label for="download" id="downloadLabel">Update</label>
+                    <progress id="download" max="100"></progress>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- dynamically loadd all modal code from here  -->
+    <div class="loadAllModalOneByOne">
+        <div id="loadFeedBackModal"></div>
+        <div id="loadAboutModal"></div>
+        <div id="loadLicenseModal"></div>
+        <div id="loadOtherModal"></div>
+        <div id="loadCookiesModal"></div>
+    </div>
+    <!-- dynamically loadd all modal code end here  -->
+    
+    <script src="./assets/js/dynamicLoadModal.js"></script>
+    <script src="./assets/prism/prism.js" data-manual></script>
+    <script src="./assets/js/renderer.js"></script>
+    <script src="./assets/js/feedback.js" defer></script>
+    <script src="./assets/js/autoLoad.js" defer></script>
+    <script src="./assets/js/sendRequest.js" defer></script>
+</body>
+</html>
+
+<!-- Feedback Modal coding start from here  -->
+<div class="modal animate__animated animate__zoomIn animate__faster" id="exampleModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form id="feedbackForm">
+                <div class="modal-header bg-info text-white py-1">
+                    <h6 class="modal-title" id="exampleModalLabel">Feedback</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Your Email</span>
+                        <input type="email" required name="userEmail" class="form-control" placeholder="Enter Your Email">
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <button type="button" id="goodBtn" class="btn good btn-outline-success ratingBtn">
+                            <i class="fa fa-thumbs-up"></i>
+                            Good, I'm setisfied !
+                        </button>
+                        <button type="button" id="badBtn" class="btn bad btn-outline-danger ratingBtn">
+                            <i class="fa fa-thumbs-down"></i>
+                            Bad, I'm not setisfied !
+                        </button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Feedback</span>
+                        <textarea class="form-control" required name="message" rows="5"></textarea>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="betaProgram" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                            Agree to join our beta program
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p id="feedbackmessage" class="me-3" style="font-size: 12px;"></p>
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="modalClose">Close</button>
+                    <button type="submit" class="btn btn-outline-primary" id="loadingBtn">
+                        Send message
+                        <i class="fa fa-spinner fa-spin d-none" id="loadingIcon"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Feedback modal coding end here  -->
+
+<!-- Other Data coding start from here  -->
+<div class="modal" tabindex="-1" id="otherModal">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered animate__animated animate__zoomIn animate__faster rounded-0">
+        <div class="modal-content rounded-0">
+            <form id="otherForm">
+                <div class="modal-header bg-dark text-light py-1">
+                    <h5 class="modal-title">Other</h5>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab">Object</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        
+                        <div class="tab-pane fade show active" id="pills-profile" role="tabpanel">
+                            <div class="table-responsive" style="max-height: 500px;">
+                                <table class="table table-bordered align-middle">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th style="width: 150px;">Key</th>
+                                            <th>Value</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="objectMainTable">
+                                        <tr>
+                                            <td style="width:150px">
+                                                <input type="text" placeholder="Name" required name="objectName[]" class="form-control">
+                                            </td>
+                                            <td colspan="2">
+                                                <table class="table table-borderless">
+                                                    <tbody id="objectTable">
+                                                        <tr>
+                                                            <td style="width: 150px;">
+                                                                <input type="text" required placeholder="key" name="objectKey[]" class="form-control">
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" required placeholder="Value" name="objectValue[]" class="form-control">
+                                                            </td>
+                                                            <td style="width: 50px;">
+                                                                <button class="btn addBtn addObjectData" type="button">
+                                                                    <i class="fa-solid fa-plus"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="width: 70px;">
+                                                <button class="btn addBtn" type="button" id="addObjectRow">
+                                                    <i class="fa-solid fa-plus"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer py-1">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="otherModalClose">Close</button>
+                    <button class="btn btn-warning" type="button" id="deleteData">Delete Data</button>
+                    <button type="submit" class="btn btn-success">
+                        Set Data
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Other Data coding end here -->
+
+<!-- Cookies coding start from here  -->
+<div class="modal" tabindex="-1" id="cookiesModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered animate__animated animate__zoomIn animate__faster rounded-0">
+        <div class="modal-content rounded-0">
+            <form id="cookiesForm">
+                <div class="modal-header bg-info text-white py-1">
+                    <h5 class="modal-title">Cookies</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-4 bg-light">
+                    <table class="table table-bordered align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Cookie</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <input type="text" required name="cookieName" placeholder="Cookie Name" class="form-control">
+                                </td>
+                                <td>
+                                    <textarea required class="form-control" name="cookieValue" id="" cols="40" rows="3"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer py-1 px-1 d-flex justify-content-between align-items-center">
+                    <div style="font-size: 13px;" class="alert alert-info fade show py-1" role="alert">
+                        <i class="fa-solid fa-circle-exclamation me-2"></i>
+                        <strong>Sory !</strong> Servie currently unavailable !
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Later</button>
+                        <button type="submit" disabled class="btn btn-success">
+                            Set Cookie
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Cookies coding end here -->

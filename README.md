@@ -5,7 +5,7 @@ This is a simple api testing tool with crypto js
 
 download the files
 
-cmd command
+`cmd command`
 * npm install
 * npm start
 

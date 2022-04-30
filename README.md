@@ -7,5 +7,6 @@ download the files
 
 cmd command
 * npm install
+* npm start
 
 and enjoy

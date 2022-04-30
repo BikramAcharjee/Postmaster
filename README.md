@@ -11,7 +11,7 @@ This is a simple api testing tool with crypto js
 
 and enjoy
 
-## v1.1.5-beta.5
+## v1.1.5-beta.5 (21 App 2022)
 ### Functionality Added in `Postmaster App`
 * Add `Cookies` functionality in `Postmaster App`
 * Add `Object` send functionnality.

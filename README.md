@@ -13,7 +13,7 @@ and enjoy
 
 ## v1.1.5-beta.5
 ### Functionality Added in `Postmaster App`
-* Add Cookies functionality in `Postmaster App`
+* Add `##### Cookies` functionality in `Postmaster App`
 * Add `Object` send functionnality.
 * Add `Array` send functionality.
 * Add `Encryption Key` functionality.

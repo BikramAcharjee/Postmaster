@@ -1,11 +1,11 @@
-# Postmaster
+## Postmaster
 
-Open Source project 
+### Open Source project 
 This is a simple api testing tool with crypto js
 
 download the files
 
 cmd command
-npm install
+*npm install
 
 and enjoy

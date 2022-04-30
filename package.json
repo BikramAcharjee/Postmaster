@@ -57,6 +57,7 @@
       "shortcutName": "Postmaster"
     }
   },
+  "private": true,
   "license": "MIT",
   "config": {
     "forge": {

@@ -1,7 +1,7 @@
 ## Postmaster App
 
 ### Open Source project 
-This is a simple api testing tool with crypto js
+This is a simple api testing tool with crypto js for desktop like Postman
 
 #### Download the files
 
